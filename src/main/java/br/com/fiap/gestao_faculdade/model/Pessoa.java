@@ -2,6 +2,10 @@ package br.com.fiap.gestao_faculdade.model;
 
 import java.time.LocalDate;
 
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,6 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "pessoa")
@@ -17,10 +24,18 @@ public class Pessoa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty(message = "O atributo nome não pode ser vazio.")
+	@Size(min = 5, max = 80, message = "O nome deve ter, ao menos, 5 letras e, no máximo, 80.")
 	private String nome;
+	@CPF(message = "O CPF informado é inválido.")
 	private String cpf;
+	@NotEmpty(message = "O atributo e-mail é obrigado.")
+	@Size(min = 6, max = 50, message = "O e-mail deve ter, "
+			+ "ao menos, 6 caracteres e, no máximo, 50.")
 	private String email;
 	private String telefone;
+	@DateTimeFormat(iso = ISO.DATE)
+	@Past(message = "A data de nascimento não pode ser futura nem presente.")
 	private LocalDate dataNascimento;
 	@Enumerated(EnumType.STRING)
 	private EnumNacionalidade nacionalidade;

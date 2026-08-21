@@ -18,16 +18,23 @@
             
             <form th:object="${pessoa}" action="/cadastrar_pessoa" method="post">
             
-            Nome: <input class="form-control" type="text" th:field="*{nome}"><br>
+            Nome: <input class="form-control" type="text" th:field="*{nome}"
+            th:errorclass="is-invalid"><br>
+            <div class ="invalid-feedback" th:errors="*{nome}"></div><br>
             
-            CPF: <input class="form-control" type="text" th:field="*{cpf}"><br>
+            CPF: <input class="form-control" type="text" th:field="*{cpf}"
+            th:errorclass="is-invalid"><br>
+            <div class="invalid-feedback" th:errors="*{cpf}"></div><br>
             
-            E-mail: <input class="form-control" type="text" th:field="*{email}"><br>
+            E-mail: <input class="form-control" type="text" th:field="*{email}"
+            th:errorclass="is-invalid"><br>
+            <div class="invalid-feedback" th:errors="*{email}"></div><br>
             
             Telefone: <input class="form-control" type="text" th:field="*{telefone}"><br>
             
             Data de Nascimento: <input class="form-control" type="date" 
-            th:field="*{dataNascimento}"><br>
+            th:field="*{dataNascimento}" th:errorclass="is-invalid"><br>
+            <div class="invalid-feedback" th:errors="*{dataNascimento}"></div><br>
             
             Nacionalidade:
             <select class="form-select" th:field="*{nacionalidade}">

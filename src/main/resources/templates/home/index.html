@@ -37,7 +37,7 @@
                             <td class="col-3" th:text="${#temporals.format(discente.pessoa.dataNascimento,'dd/MM/yyyy')}">D</td>
                             <th class="col-3" th:text="${discente.status.descricao}">D</th>
                             <td class="col-3"><a th:href="@{/discente/detalhes/{idDiscente}(idDiscente = ${discente.id})}">Detalhes</a></td>
-                            <td class="col-3"><a th:href="@{/discente/editor/{idDiscente}(idDiscente = ${discente.id})}">Editar</a></td>
+                            <td class="col-3"><a th:href="@{/discente/editar/{x}(x = ${discente.id})}">Editar</a></td>
                             <th class="col-3"><a th:href="@{/discente/remover/{idDiscente}(idDiscente = ${discente.id})}">Remover</a></th>
                         </tr>
                     </tbody>

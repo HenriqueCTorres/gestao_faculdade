@@ -9,6 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "discente")
@@ -18,10 +21,17 @@ public class Discente {
 	@GeneratedValue
 	(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty(message = "O RM é um campo obrigatório.")
+	@Size(min = 3, max = 20, message = "O RM deve ter, ao menos, 3"
+			+ " caracteres e, no máximo, 20.")
 	private String rm;
 	@ManyToOne
 	@JoinColumn(name = "fk_pessoa")
+	@Valid
 	private Pessoa pessoa;
+	@NotEmpty(message = "O atributo e-ma+il é obrigatório.")
+	@Size(min = 6, max = 50, message = "O email deve ter, ao menos, 6"
+			+ " caracteres e, no máximo, 50.")
 	private String emailInstitucional;
 	@Enumerated(EnumType.STRING)
 	private EnumStatus status;
@@ -40,6 +50,14 @@ public class Discente {
 		this.emailInstitucional = emailInstitucional;
 		this.status = status;
 		this.nivel = nivel;
+	}
+	
+	public void transferirDiscente(Discente discente) {
+		setRm(discente.getRm());
+		setEmailInstitucional(discente.getEmailInstitucional());
+		setStatus(discente.getStatus());
+		setNivel(discente.getNivel());
+		setPessoa(discente.getPessoa());
 	}
 
 	public Long getId() {
